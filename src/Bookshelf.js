@@ -8,8 +8,8 @@ function Bookshelf(props) {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {props.books.map(book => (
-            <li>
-              <Book key={book.id} book={book} />
+            <li key={book.id}>
+              <Book book={book} />
             </li>
           ))}
         </ol>
