@@ -4,7 +4,7 @@ import Bookshelf from './Bookshelf';
 
 class MyBooks extends Component {
   render() {
-    const {currentlyReading, wantToRead, read} = this.props;
+    const {currentlyReading, wantToRead, read, moveBook} = this.props;
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -12,9 +12,9 @@ class MyBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Bookshelf books={currentlyReading} title='Currently Reading' />
-            <Bookshelf books={wantToRead} title='Want to Read' />
-            <Bookshelf books={read} title='Read' />
+            <Bookshelf books={currentlyReading} title='Currently Reading' moveBook={moveBook} />
+            <Bookshelf books={wantToRead} title='Want to Read' moveBook={moveBook} />
+            <Bookshelf books={read} title='Read' moveBook={moveBook} />
           </div>
         </div>
         <div className="open-search">
