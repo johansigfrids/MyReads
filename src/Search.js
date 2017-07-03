@@ -10,6 +10,10 @@ class Search extends Component {
 
   search = (e) => {
     const query = e.target.value;
+    if (!query) {
+      this.setState({searchResults: []});
+      return;
+    }
     BooksAPI.search(query, 20).then(searchResults => {
       if (searchResults.error) {
         searchResults = [];
