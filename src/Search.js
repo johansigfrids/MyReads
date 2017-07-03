@@ -14,6 +14,13 @@ class Search extends Component {
       if (searchResults.error) {
         searchResults = [];
       }
+      searchResults = searchResults.map( (book) => {
+        const bookInShelf = this.props.books.find(b => b.id === book.id);
+        if (bookInShelf) {
+          book.shelf = bookInShelf.shelf;
+        }
+        return book;
+      });
       this.setState({searchResults});
     });
   }

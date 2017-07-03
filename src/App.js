@@ -50,18 +50,23 @@ class BooksApp extends React.Component {
   }
 
   render() {
+    const {currentlyReading, wantToRead, read} = this.state;
     return (
       <div className="app">
         <Route exact path="/" render={() => (
           <MyBooks 
-            currentlyReading={this.state.currentlyReading}
-            wantToRead={this.state.wantToRead}
-            read={this.state.read}
+            currentlyReading={currentlyReading}
+            wantToRead={wantToRead}
+            read={read}
             moveBook={this.moveBook}
           />
         )} />
         <Route path="/search" render={({history}) =>(
-          <Search moveBook={this.moveBook} history={history}/>
+          <Search 
+            moveBook={this.moveBook} 
+            history={history}
+            books={currentlyReading.concat(wantToRead, read)}
+          />
         )} />
       </div>
     )
