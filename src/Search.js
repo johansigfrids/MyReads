@@ -18,11 +18,6 @@ class Search extends Component {
     });
   }
 
-  addBook = (book, shelf) => {
-    this.props.moveBook(book, shelf);
-    this.props.history.push('/');
-  }
-
   render() {
     return (
       <div className="search-books">
@@ -36,7 +31,7 @@ class Search extends Component {
           <ol className="books-grid">
             {this.state.searchResults && this.state.searchResults.map(book => (
               <li key={book.id}>
-                <Book book={book} moveBook={this.addBook} />
+                <Book book={book} moveBook={this.props.moveBook} />
               </li>
             ))}
           </ol>
