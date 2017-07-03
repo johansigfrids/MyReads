@@ -22,31 +22,32 @@ class BooksApp extends React.Component {
   }
 
   moveBook = (book, shelf) => {
-    BooksAPI.update(book, shelf);
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState(state => {
+        book.shelf = shelf;
 
-    this.setState(state => {
-      book.shelf = shelf;
+        const currentlyReading = state.currentlyReading.filter(b => b.id !== book.id);
+        const wantToRead = state.wantToRead.filter(b => b.id !== book.id);
+        const read = state.read.filter(b => b.id !== book.id);
 
-      const currentlyReading = state.currentlyReading.filter(b => b.id !== book.id);
-      const wantToRead = state.wantToRead.filter(b => b.id !== book.id);
-      const read = state.read.filter(b => b.id !== book.id);
+        switch (shelf) {
+          case 'currentlyReading':
+            currentlyReading.push(book);
+            break;
+          case 'wantToRead':
+            wantToRead.push(book);
+            break;
+          case 'read':
+            read.push(book);
+            break;
+          default: 
+            break;
+        }
 
-      switch (shelf) {
-        case 'currentlyReading':
-          currentlyReading.push(book);
-          break;
-        case 'wantToRead':
-          wantToRead.push(book);
-          break;
-        case 'read':
-          read.push(book);
-          break;
-        default: 
-          break;
-      }
-
-      return { currentlyReading, wantToRead, read};
+        return { currentlyReading, wantToRead, read};
+      });
     });
+
   }
 
   render() {
